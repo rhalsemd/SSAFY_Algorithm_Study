@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		
+		String[] name1 = new String[n];
+		
+		HashMap<String, Integer> map1 = new HashMap<>();
+		
+		for(int i=0; i<n; i++) {
+			name1[i] = sc.next();
+			
+		}
+		for(int i=0; i<m; i++) {
+			String key = sc.next();
+			map1.put(key, i);
+		}
+		
+		ArrayList list = new ArrayList<>();
+		
+		for(int i=0; i<n; i++) {
+			if(map1.containsKey(name1[i])) {
+				list.add(name1[i]);
+			}
+		}
+		String[] arr = new String[list.size()];
+		list.toArray(arr);
+		
+		Arrays.sort(arr);
+		
+		// hashmap 으로 해서 있는지 없는지 확인한다..
+		System.out.println(arr.length);
+		for(int i=0; i<arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
