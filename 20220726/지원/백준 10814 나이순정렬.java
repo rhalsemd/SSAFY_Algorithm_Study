@@ -4,7 +4,6 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
-		StringBuilder[] sb = new StringBuilder[201];
 		String [] info=new String[201];
 		Set <Integer> ages=new HashSet<>();
 		int n=sc.nextInt();
