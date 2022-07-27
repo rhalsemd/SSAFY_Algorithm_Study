@@ -1,31 +1,34 @@
-package s0727.ex11651;
+package s0727.ex1316;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int[][] arr = new int[n][2];
 		
-		for(int i=0; i<arr.length; i++) {
-			for(int j=0; j<2; j++) {
-				arr[i][j] = sc.nextInt();
+		int answer = 0;
+		
+		for(int i=0; i<n; i++) {
+			String word = sc.next();
+			int len = word.length();
+			int[] dup = new int['z'-'a'+1]; // 26개는 0 ~ 25라서 +1 필요 
+			
+			dup[word.charAt(0)-'a']++;
+			
+			boolean checker = true;
+			for(int j=1; j<len; j++) {
+				if(word.charAt(j) != word.charAt(j-1)){
+					if(dup[word.charAt(j)-'a'] > 0) {
+						checker=false;
+						break;
+					}
+				}
+				dup[word.charAt(j)-'a']++;
 			}
+			if(checker) answer++;
 		}
+		System.out.println(answer);
 		
-		Arrays.sort(arr, new Comparator<int[]>() {
-			@Override
-			public int compare(int[] o1, int[] o2) {  // 오름차순 o1 - o2 = - 
-				if(o1[1] != o2[1]) return o1[1] - o2[1];
-				else return o1[0] - o2[0];  // x 오름차순 
-			}
-		});
-		
-		for(int i=0; i<arr.length; i++) {
-			System.out.println(arr[i][0] + " "+ arr[i][1]);
-		}
 	}
 }
