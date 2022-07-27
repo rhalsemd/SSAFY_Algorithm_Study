@@ -1,0 +1,104 @@
+ 
+import java.util.*;
+
+public class Main {
+	 
+	public static boolean [][] visited=new boolean[19][19];
+	public static boolean isInsideGraph(int x,int y) {
+		if(x>=0 && y>=0 && x<19 &y<19) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean check(int x,int y,int [][] graph,int dir) {
+		int col=graph[x][y];
+		boolean res=false;
+		
+		
+		
+		//가로탐색이면 0, 세로탐색이면 1 대각선 아래면2 대각선 위면3
+		int [] dx= {0,1,1,-1};
+		int [] dy= {1,0,1,1};
+		
+		//-1번째가 같은 색깔인지 탐색
+		if(isInsideGraph(x-dx[dir],y-dy[dir])) {
+			if(graph[x-dx[dir]][y-dy[dir]]==col) {
+				return false;
+			}
+		}
+		
+		
+		int count=0;
+		 
+		//탐색 방향에 맞게 4칸을 더 확인
+		for(int i=1;i<5;i++) {
+			x=x+dx[dir];
+			y=y+dy[dir];
+			if(isInsideGraph(x,y)) {
+				if(graph[x][y]==col) {
+					count+=1;      
+				}
+				  
+				 
+			}
+		}
+		//5개 연속 같은색이면 6번째를 살피기 
+		if(count==4) {
+			x=x+dx[dir];
+			y=y+dy[dir];
+			if(isInsideGraph(x,y)) {
+				if(graph[x][y]!=col) {
+					res=true;      
+				}				 
+			}
+			else {
+				res=true;
+			}
+		}
+		 
+		return res;
+	}
+	public static void main(String[] args) {
+		 
+		Scanner sc=new Scanner(System.in);
+		int [][] graph=new int [19][19];
+		
+		for(int i=0;i<19;i++) {
+			for(int j=0;j<19;j++) {
+				graph[i][j]=sc.nextInt();
+			}
+		}
+		 
+		int winner=0;
+		int winX=0;
+		int winY=0;
+		boolean breakOrNot=false;
+		for(int i=0;i<19;i++) {
+			for(int j=0;j<19;j++) {
+				if(graph[i][j]!=0 ) {
+					//가로 세로 대각선2방향 중 하나라도 오목이 잇으면
+					if(check(i,j,graph,0)||check(i,j,graph,1)||check(i,j,graph,2)||check(i,j,graph,3)) {
+						winner=graph[i][j];
+						winX=i;
+						winY=j;
+						breakOrNot=true;
+						break;
+						
+					}
+				}
+			}
+			if(breakOrNot) break;
+		}
+		System.out.println(winner);
+		if(winner!=0)
+			System.out.println((winX+1)+" "+(winY+1));
+		
+		
+		 
+		
+		 
+		
+	}
+
+}
+
