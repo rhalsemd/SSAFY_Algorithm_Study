@@ -1,5 +1,5 @@
 import java.util.*;
-//BJ 1244-스위치 켜고 끄기
+
 import java.io.*;
 public class Main {
 	 
