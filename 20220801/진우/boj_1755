@@ -1,0 +1,36 @@
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int m = sc.nextInt();
+		int n = sc.nextInt();
+		
+		String[] nums =  {
+				"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
+		};
+		
+		TreeMap<String, Integer> map = new TreeMap<>();
+		
+		for(int i=m; i<=n; i++) {
+			if(i/10 != 0) {
+				map.put(nums[i/10]+" "+nums[i%10], i);
+			}
+			else {
+				map.put(nums[i%10], i);
+			}
+		}
+		
+		int newline =0;
+		for(Map.Entry<String, Integer> entry : map.entrySet()) {
+			if(newline%10==0 && newline!=0) {
+				System.out.println();
+			}
+			System.out.print(entry.getValue()+ " ");
+			newline++;
+		}
+	}
+}
