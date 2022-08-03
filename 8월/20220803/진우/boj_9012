@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+
+// https://www.acmicpc.net/problem/9012
+public class Main {
+	static boolean check(Stack<Character> stack) {
+		Stack<Character> stack2 = new Stack<>();
+		while(!stack.isEmpty()) {
+			if(stack.peek() == ')') {
+				stack2.add(stack.pop());
+			}
+			else if(stack.peek() == '(') {
+				if(stack2.isEmpty()) return false;
+				stack.pop();
+				stack2.pop();
+			}
+		}
+		if(!stack2.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int T = Integer.parseInt(br.readLine());
+		for(int t=1; t<=T; t++) {
+			String str = br.readLine();
+			Stack<Character> stack = new Stack<Character>();
+			
+			for(int i=0; i<str.length(); i++) {
+				stack.add(str.charAt(i));
+			}
+			
+			if(check(stack)) System.out.println("YES");
+			else System.out.println("NO");
+		}
+		
+	}
+}
