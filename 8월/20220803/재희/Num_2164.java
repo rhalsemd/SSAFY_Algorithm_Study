@@ -26,5 +26,5 @@ public class Num_2164 {
 		bw.write(deque.pollLast() + "");
 		bw.flush();
 		bw.close();
-	}
+	} 
 }
