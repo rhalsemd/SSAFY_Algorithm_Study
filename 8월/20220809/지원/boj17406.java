@@ -20,8 +20,8 @@ public class Main {
 			 int k=Integer.parseInt(NMK[2]);
 			 graph=new int[n][m];
 			 originGraph=new int[n][m];
-			 output=new int[k]; //순열 계사 위한 배열1
-			 visited=new boolean[k]; //순열 계사 위한 배열2
+			 output=new int[k]; //순열 계산 위한 배열1
+			 visited=new boolean[k]; //순열 계 위한 배열2
 			 int answer=Integer.MAX_VALUE;
 			 perm(0,k);  
 			 for(int i=0;i<n;i++) {
