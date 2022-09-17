@@ -1,0 +1,45 @@
+package study;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class BOJ12865 {
+	static int max =0;
+	static int N, K;
+	static int dp[][], w[], v[];  //dp배열, 무게, 가치순
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		K = sc.nextInt();
+		
+		dp = new int [N+1][K+1];
+		
+		w = new int[N+1];
+		v = new int[N+1];
+		
+		for(int i=1; i<=N; i++) {
+			w[i] = sc.nextInt();
+			v[i] = sc.nextInt();
+		}
+		
+		for(int i=1; i<=N; i++) {
+			for(int j=1; j<=K; j++) {
+				dp[i][j] = dp[i-1][j];
+				if(j - w[i] >= 0){
+					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-w[i]]+v[i]);
+					// 이전 아이템에서 구한 가치와 남은 무게의 가치 + 자신의 가치 중 큰 값을 취한다. 
+				}
+			}
+		}
+		
+		System.out.println(dp[N][K]);
+	}
+}
+
+/*
+ * dfs() 방식으로 하되, 부분집합 문제이다.
+ * 물건의 인덱스 번호를 저장하고, 만약 무게 총합이 K를 넘어가면 가지치기 한다.
+ * -> 굳이 부분집합을 구하지 않고 dp 2차원 배열을 사용하면 다양한 경우의 수를 자동으로 고려하게 되어 
+ * -> dp를 채택하였다. 
+ */
